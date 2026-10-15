@@ -147,25 +147,4 @@ cucugoyo-store/
 | **Render**               | Publicación del sitio                        |
 | **Git / GitHub**         | Control de versiones y repositorio remoto    |
 
----
 
-## Instalación y ejecución
-
-### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/TU-USUARIO/cucugoyo-store.git
-cd cucugoyo-store
-```
-
-### 2. Instalar dependencias
-
-```bash
-npm install
-```
-
-### 3. Configurar las variables de entorno
-
-Crea un archivo `.env` en la raíz (puedes basarte en `.env.example`):
-
-```e
