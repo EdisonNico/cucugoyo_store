@@ -9,8 +9,8 @@ export const STORE = {
   hero: '/hero.jpg',
 
   // WhatsApp en formato internacional, solo números (Perú = 51 + número).
-  whatsappNumber: '51900000000',
-  phoneDisplay: '+51 900 000 000',
+  whatsappNumber: '51981035761',
+  phoneDisplay: '+51 981035761 - +51 977467689',
   instagramUrl: 'https://instagram.com/tu_usuario',
   email: '',
 }
