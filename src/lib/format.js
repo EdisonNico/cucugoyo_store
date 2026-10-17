@@ -6,9 +6,9 @@ export function formatPrice(value) {
   return money.format(Number(value) || 0)
 }
 
-export function whatsappLink(message = '') {
+export function whatsappLink(message = '', number = STORE.whatsappNumber) {
   const text = message ? `?text=${encodeURIComponent(message)}` : ''
-  return `https://wa.me/${STORE.whatsappNumber}${text}`
+  return `https://wa.me/${number}${text}`
 }
 
 export function productWhatsappLink(product) {
