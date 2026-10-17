@@ -77,11 +77,12 @@ label { display: flex; flex-direction: column; gap: .3rem; font-size: .9rem; fon
 .hero { max-width: var(--maxw); margin: 1.5rem auto 0; padding: 0 1.25rem; }
 .hero img { width: 100%; height: clamp(180px, 38vw, 460px); object-fit: cover; border-radius: var(--radius); }
 .hero-fallback {
-  min-height: 220px; display: grid; place-content: center; text-align: center; padding: 2rem;
-  border-radius: var(--radius); color: #fff;
+  height: clamp(180px, 38vw, 460px); border-radius: var(--radius);
   background: linear-gradient(135deg, #b38a64, #e9b44c 55%, #d9482b);
 }
-.hero-fallback h1 { font-size: clamp(1.8rem, 5vw, 3rem); }
+.hero-text { max-width: var(--maxw); margin: 0 auto; padding: 1.5rem 1.25rem 0; text-align: center; }
+.hero-text h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 700; margin: 0 0 .4rem; color: var(--brown-dark); }
+.hero-text p { margin: 0; font-size: clamp(1rem, 2.4vw, 1.25rem); color: var(--muted); }
 
 /* ---------- Secciones y carruseles ---------- */
 .section { max-width: var(--maxw); margin: 2.5rem auto 0; padding: 0 1.25rem; }
@@ -149,6 +150,27 @@ label { display: flex; flex-direction: column; gap: .3rem; font-size: .9rem; fon
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Panel de filtros desplegable */
+.filters-toggle {
+  display: inline-flex; align-items: center; gap: .6rem; cursor: pointer; font: inherit; font-weight: 600;
+  background: var(--brown-dark); color: #fff; border: 0; border-radius: 999px; padding: .6rem 1.2rem; margin-bottom: 1rem;
+  transition: background .15s;
+}
+.filters-toggle:hover { background: #55402f; }
+.filters-count {
+  background: var(--red); color: #fff; font-size: .75rem; min-width: 1.35rem; height: 1.35rem;
+  display: inline-grid; place-items: center; border-radius: 999px; padding: 0 .35rem;
+}
+.filters-chevron { transition: transform .25s; }
+.filters-toggle.is-open .filters-chevron { transform: rotate(180deg); }
+.filters-wrap {
+  display: grid; grid-template-rows: 0fr; visibility: hidden;
+  transition: grid-template-rows .28s ease, visibility 0s linear .28s;
+}
+.filters-wrap.open { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows .28s ease, visibility 0s; }
+.filters-wrap-inner { overflow: hidden; min-height: 0; padding: 0 4px; }
+.filters-wrap-inner .filters { margin-bottom: 1.5rem; }
+
 /* ---------- Detalle ---------- */
 .detail { display: grid; grid-template-columns: minmax(240px, 420px) 1fr; gap: 2.5rem; align-items: start; }
 .detail-img { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 1rem; display: grid; place-items: center; }
@@ -168,6 +190,8 @@ label { display: flex; flex-direction: column; gap: .3rem; font-size: .9rem; fon
 .footer-slogan { font-size: 1.35rem; margin: 0 0 1rem; }
 .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem 2rem; font-size: 1.1rem; justify-items: center; }
 .footer-links a:hover { text-decoration: underline; }
+.footer-phones { display: flex; justify-content: center; align-items: center; gap: .6rem 1.75rem; flex-wrap: wrap; margin-top: 1rem; font-size: 1.1rem; }
+.footer-phones a:hover { text-decoration: underline; }
 .footer-copy { font-size: .78rem; opacity: .65; margin: 1.25rem 0 0; }
 
 .whatsapp-float { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 30; filter: drop-shadow(0 4px 8px rgba(0,0,0,.3)); transition: transform .15s; }
@@ -228,3 +252,25 @@ label { display: flex; flex-direction: column; gap: .3rem; font-size: .9rem; fon
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* ---------- Hoja en blanco (Términos y condiciones) ---------- */
+.sheet-wrap { max-width: 920px; margin: 0 auto; padding: 2.5rem 1.25rem 3.5rem; }
+.sheet {
+  background: #fff; border: 1px solid #eadfca; border-radius: 24px;
+  padding: clamp(1.5rem, 5vw, 3.5rem); box-shadow: 0 2px 14px rgba(58, 42, 32, .08);
+  font-family: 'Source Sans 3', 'Inter', system-ui, sans-serif; color: #4a3f36;
+}
+.sheet-back {
+  background: none; border: 0; padding: 0; cursor: pointer; font: inherit; font-weight: 700;
+  font-size: .9rem; color: var(--red-dark); margin-bottom: 2.25rem;
+}
+.sheet-back:hover { text-decoration: underline; }
+.sheet-eyebrow { margin: 0 0 .5rem; font-size: .75rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #c8961e; }
+.sheet-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; color: #1d1712; margin: 0 0 .6rem; }
+.sheet-sub { margin: 0; font-size: .85rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #6d625a; }
+.sheet-sub-dark { color: #1d1712; margin-top: .35rem; margin-bottom: 2.5rem; }
+.sheet h2 { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; color: #1d1712; margin: 2.25rem 0 .9rem; }
+.sheet p { margin: 0 0 1rem; line-height: 1.9; font-size: 1.05rem; }
+.sheet ul { margin: 0 0 1rem; padding-left: 1.5rem; }
+.sheet li { line-height: 1.8; font-size: 1.05rem; margin-bottom: .4rem; }
+  

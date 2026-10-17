@@ -14,6 +14,7 @@ export default function Catalog({ category = null }) {
   const [search, setSearch] = useState(params.get('q') || '')
   const [collections, setCollections] = useState([])
   const debouncedSearch = useDebounce(search)
+  const [open, setOpen] = useState(false) // panel de filtros cerrado al entrar
 
   // Si llega una búsqueda desde la barra superior, se refleja en el campo.
   const urlQ = params.get('q') || ''
@@ -24,6 +25,7 @@ export default function Catalog({ category = null }) {
   const collection = params.get('col') || ''
   const sort = params.get('sort') || 'recent'
   const cat = category || params.get('cat') || ''
+  const activeFilters = [urlQ, minPrice, maxPrice, collection, sort !== 'recent' && sort, !category && cat].filter(Boolean).length
 
   useEffect(() => {
     listCollections(cat || undefined).then(setCollections).catch(() => setCollections([]))
@@ -58,6 +60,20 @@ export default function Catalog({ category = null }) {
     <div className="page">
       <h1 className="page-title">{TITLES[cat] || 'Todos los productos'}</h1>
 
+      <button
+        type="button"
+        className={`filters-toggle ${open ? 'is-open' : ''}`}
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls="filters-panel"
+      >
+        <span>Filtrar</span>
+        {activeFilters > 0 && <span className="filters-count">{activeFilters}</span>}
+        <span className="filters-chevron" aria-hidden="true">▾</span>
+      </button>
+
+      <div id="filters-panel" className={`filters-wrap ${open ? 'open' : ''}`}>
+        <div className="filters-wrap-inner">
       <div className="filters">
         <label>
           Buscar
@@ -118,6 +134,8 @@ export default function Catalog({ category = null }) {
         <button className="btn btn-ghost" onClick={clearFilters}>
           Limpiar filtros
         </button>
+      </div>
+        </div>
       </div>
 
       {loading ? (

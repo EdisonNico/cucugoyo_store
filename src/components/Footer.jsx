@@ -16,9 +16,20 @@ export default function Footer() {
             <Link to="/paquetes">Productos sellados</Link>
             <Link to="/terminos">Términos y condiciones</Link>
             <Link to="/cartas">Cartas</Link>
-            <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
-              Teléfono: {STORE.phoneDisplay}
-            </a>
+          </div>
+          <div className="footer-phones">
+            <span>Teléfonos:</span>
+            {STORE.phones.map((p) => (
+              <a
+                key={p.number}
+                href={whatsappLink(STORE.welcomeMessage, p.number)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Escribir por WhatsApp al ${p.display}`}
+              >
+                {p.display}
+              </a>
+            ))}
           </div>
           <p className="footer-copy">
             © {new Date().getFullYear()} {STORE.name}. Pokémon y sus marcas pertenecen a sus respectivos dueños.

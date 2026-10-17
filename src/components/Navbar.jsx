@@ -42,7 +42,7 @@ export default function Navbar() {
           <a href={STORE.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <InstagramIcon />
           </a>
-          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <a href={whatsappLink(STORE.welcomeMessage)} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
             <WhatsAppIcon />
           </a>
         </div>

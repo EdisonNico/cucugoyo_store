@@ -15,11 +15,13 @@ export default function Home() {
         {!heroFailed ? (
           <img src={STORE.hero} alt={STORE.name} onError={() => setHeroFailed(true)} />
         ) : (
-          <div className="hero-fallback">
-            <h1>{STORE.name}</h1>
-            <p>{STORE.slogan}</p>
-          </div>
+          <div className="hero-fallback" aria-hidden="true" />
         )}
+      </div>
+
+      <div className="hero-text">
+        <h1>{STORE.name}</h1>
+        <p>{STORE.slogan}</p>
       </div>
 
       {featured.products.length > 0 && (
