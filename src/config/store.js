@@ -1,6 +1,6 @@
 const PHONES = [
-  { display: '+51 981 035 761', number: '51981035761' }, // CAMBIA por tu primer número
-  { display: '+51 977 467 689', number: '51977467689' }, // CAMBIA por tu segundo número
+  { display: '+51 981 035 761', number: '51981035761' }, 
+  { display: '+51 977 467 689', number: '51977467689' },  
 ]
 
 // Datos de la tienda. Cambia aquí el nombre, contacto y redes: se actualiza en todo el sitio.
