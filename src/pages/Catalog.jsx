@@ -150,8 +150,8 @@ export default function Catalog({ category = null }) {
             {products.length} producto{products.length === 1 ? '' : 's'}
           </p>
           <div className="grid">
-            {products.map((p) => (
-              <ProductCard key={p.id} product={p} />
+            {products.map((p, i) => (
+              <ProductCard key={p.id} product={p} index={i} />
             ))}
           </div>
         </>

@@ -38,9 +38,9 @@ export default function ProductCarousel({ title, to, products, loading, error, o
         <EmptyState message="Pronto añadiremos productos aquí." />
       ) : (
         <div className="carousel" ref={track}>
-          {products.map((p) => (
+          {products.map((p, i) => (
             <div className="carousel-item" key={p.id}>
-              <ProductCard product={p} />
+              <ProductCard product={p} index={i} />
             </div>
           ))}
         </div>
