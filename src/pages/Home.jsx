@@ -25,8 +25,8 @@ export default function Home() {
       </div>
 
       {featured.products.length > 0 && (
-        <CoverflowCarousel title="Destacados" subtitle="Los favoritos de la tienda" to="/catalogo" {...featured} onRetry={featured.reload} />
-      )}
+<CoverflowCarousel title="Destacados" subtitle="Los favoritos de la tienda" {...featured} onRetry={featured.reload} />
+)}
       <CoverflowCarousel title="Cartas" subtitle="Desliza y toca una carta" to="/cartas" {...cards} onRetry={cards.reload} />
       <CoverflowCarousel title="Paquetes sellados" subtitle="Sobres, cajas y más" to="/paquetes" {...sealed} onRetry={sealed.reload} />
     </>

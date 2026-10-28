@@ -4,6 +4,7 @@ import { getProductBySlug } from '../services/productService'
 import { subscribeProducts } from '../lib/realtime'
 import { CATEGORY_LABELS, CONDITION_LABELS, LANGUAGE_LABELS, formatPrice, productWhatsappLink } from '../lib/format'
 import { ErrorMessage, Loader } from '../components/States'
+import HoloCard from '../components/HoloCard'
 
 export default function ProductDetail() {
   const { slug } = useParams()
@@ -58,8 +59,8 @@ export default function ProductDetail() {
 
   return (
     <div className="page detail">
-      <div className="detail-img">
-        {product.imageUrl ? <img src={product.imageUrl} alt={product.name} /> : <span className="card-noimg">Sin imagen</span>}
+      <div className="detail-media">
+        <HoloCard product={product} details={details} />
       </div>
       <div className="detail-info">
         <Link to={product.category === 'carta' ? '/cartas' : '/paquetes'} className="back">

@@ -38,7 +38,8 @@ export default function CoverflowCarousel({
     return () => ro.disconnect()
   }, [hasItems])
 
-  const go = (d) => setActive((a) => Math.min(n - 1, Math.max(0, a + d)))
+  // Da la vuelta: después de la última carta vuelve a la primera (y al revés).
+  const go = (d) => setActive((a) => (a + d + n) % n)
 
   const onPan = (_e, info) => {
     if (Math.abs(info.offset.x) > 6) dragged.current = true
@@ -81,7 +82,7 @@ export default function CoverflowCarousel({
         ) : (
           <>
             <div className="cf-wrap">
-              <button className="arrow cf-arrow cf-prev" onClick={() => go(-1)} disabled={active === 0} aria-label="Anterior">
+              <button className="arrow cf-arrow cf-prev" onClick={() => go(-1)} aria-label="Anterior">
                 <ArrowIcon dir="left" />
               </button>
 
@@ -159,7 +160,7 @@ export default function CoverflowCarousel({
                 })}
               </motion.div>
 
-              <button className="arrow cf-arrow cf-next" onClick={() => go(1)} disabled={active === n - 1} aria-label="Siguiente">
+              <button className="arrow cf-arrow cf-next" onClick={() => go(1)} aria-label="Siguiente">
                 <ArrowIcon />
               </button>
             </div>
