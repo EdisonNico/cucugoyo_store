@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useProducts } from '../hooks/useProducts'
-import ProductCarousel from '../components/ProductCarousel'
+import CoverflowCarousel from '../components/CoverflowCarousel'
 import { STORE } from '../config/store'
 
 export default function Home() {
@@ -25,10 +25,10 @@ export default function Home() {
       </div>
 
       {featured.products.length > 0 && (
-        <ProductCarousel title="Destacados" to="/catalogo" {...featured} onRetry={featured.reload} />
-      )}
-      <ProductCarousel title="Cartas" to="/cartas" {...cards} onRetry={cards.reload} />
-      <ProductCarousel title="Paquetes sellados" to="/paquetes" {...sealed} onRetry={sealed.reload} />
+<CoverflowCarousel title="Destacados" subtitle="Los favoritos de la tienda" {...featured} onRetry={featured.reload} />
+)}
+      <CoverflowCarousel title="Cartas" subtitle="Desliza y toca una carta" to="/cartas" {...cards} onRetry={cards.reload} />
+      <CoverflowCarousel title="Paquetes sellados" subtitle="Sobres, cajas y más" to="/paquetes" {...sealed} onRetry={sealed.reload} />
     </>
   )
 }

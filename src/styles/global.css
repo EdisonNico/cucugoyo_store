@@ -19,13 +19,13 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  background: var(--cream);
+  background: #eee1c6 url('/fondo.webp') repeat top left / 1024px auto;
   color: var(--ink);
   line-height: 1.5;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
-h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5rem; }
+h1, h2, h3 { font-family: 'Poppins', 'Inter', system-ui, sans-serif; line-height: 1.2; margin: 0 0 0.5rem; }
 code { background: rgba(0,0,0,.08); padding: 1px 5px; border-radius: 4px; }
 .main { min-height: 60vh; }
 
@@ -107,9 +107,9 @@ label { display: flex; flex-direction: column; gap: .3rem; font-size: .9rem; fon
 .card {
   display: flex; flex-direction: column; height: 100%; background: var(--paper);
   border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
-  transition: transform .18s, box-shadow .18s;
+  transition: box-shadow .18s;
 }
-.card:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(58,42,32,.2); }
+.card:hover { box-shadow: 0 12px 28px rgba(58,42,32,.28); }
 .card-img { position: relative; aspect-ratio: 5 / 7; background: #fff; display: grid; place-items: center; }
 .card-img img { width: 100%; height: 100%; object-fit: contain; }
 .card-noimg { color: var(--muted); font-size: .9rem; }
@@ -144,11 +144,6 @@ label { display: flex; flex-direction: column; gap: .3rem; font-size: .9rem; fon
 
 .state { display: flex; align-items: center; justify-content: center; gap: .75rem; padding: 2.5rem 1rem; color: var(--muted); text-align: center; }
 .state-error { color: var(--red-dark); flex-wrap: wrap; }
-.spinner {
-  width: 22px; height: 22px; border: 3px solid #d8c3a0; border-top-color: var(--brown-dark);
-  border-radius: 50%; animation: spin .8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* Panel de filtros desplegable */
 .filters-toggle {
@@ -258,7 +253,7 @@ label { display: flex; flex-direction: column; gap: .3rem; font-size: .9rem; fon
 .sheet {
   background: #fff; border: 1px solid #eadfca; border-radius: 24px;
   padding: clamp(1.5rem, 5vw, 3.5rem); box-shadow: 0 2px 14px rgba(58, 42, 32, .08);
-  font-family: 'Source Sans 3', 'Inter', system-ui, sans-serif; color: #4a3f36;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; color: #4a3f36;
 }
 .sheet-back {
   background: none; border: 0; padding: 0; cursor: pointer; font: inherit; font-weight: 700;
@@ -266,11 +261,109 @@ label { display: flex; flex-direction: column; gap: .3rem; font-size: .9rem; fon
 }
 .sheet-back:hover { text-decoration: underline; }
 .sheet-eyebrow { margin: 0 0 .5rem; font-size: .75rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #c8961e; }
-.sheet-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; color: #1d1712; margin: 0 0 .6rem; }
+.sheet-title { font-family: 'Poppins', 'Inter', system-ui, sans-serif; font-size: clamp(2rem, 6vw, 3rem); font-weight: 700; color: #1d1712; margin: 0 0 .6rem; }
 .sheet-sub { margin: 0; font-size: .85rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #6d625a; }
 .sheet-sub-dark { color: #1d1712; margin-top: .35rem; margin-bottom: 2.5rem; }
 .sheet h2 { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; color: #1d1712; margin: 2.25rem 0 .9rem; }
 .sheet p { margin: 0 0 1rem; line-height: 1.9; font-size: 1.05rem; }
 .sheet ul { margin: 0 0 1rem; padding-left: 1.5rem; }
 .sheet li { line-height: 1.8; font-size: 1.05rem; margin-bottom: .4rem; }
-  
+
+/* ---------- Animaciones Pokémon ---------- */
+.card-tilt { height: 100%; transform-style: preserve-3d; will-change: transform; }
+.card-img { overflow: hidden; }
+.holo {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .25s;
+  background:
+    linear-gradient(115deg, transparent 20%, rgba(255,0,128,.35) 32%, rgba(255,220,0,.35) 42%,
+      rgba(0,255,170,.35) 52%, rgba(0,160,255,.35) 62%, rgba(160,80,255,.35) 72%, transparent 84%);
+  background-size: 250% 250%; mix-blend-mode: color-dodge;
+}
+.card-tilt:hover .holo { opacity: .75; }
+
+/* Pokébola de carga */
+.pokeball { width: 34px; height: 34px; display: inline-block; animation: pokeball-hop 1.1s ease-in-out infinite; }
+.pokeball svg { width: 100%; height: 100%; display: block; animation: pokeball-roll 1.1s ease-in-out infinite; }
+@keyframes pokeball-hop { 0%,100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 70% { transform: translateY(0); } }
+@keyframes pokeball-roll { 0% { transform: rotate(0); } 70%,100% { transform: rotate(360deg); } }
+
+/* ---------- Carrusel 3D (portada) ---------- */
+.cf-section { padding-top: .5rem; }
+.cf-panel {
+  background: #efe0c3;
+  border-radius: 28px; padding: 1.75rem 1rem 1.5rem; color: #111;
+  border: 1px solid #d6c29b;
+  box-shadow: 0 10px 30px rgba(58, 42, 32, .15); overflow: hidden;
+  /* Crea su propio nivel de capas: así las cartas nunca pasan por encima del menú superior. */
+  position: relative; z-index: 0; isolation: isolate;
+}
+.cf-head { text-align: center; margin-bottom: .75rem; }
+.cf-head h2 { margin: 0; font-size: clamp(1.5rem, 4vw, 2.1rem); color: #111; }
+.cf-head p { margin: .25rem 0 0; color: #2b2118; font-size: .95rem; }
+.cf-all {
+  display: inline-block; margin-top: .6rem; font-size: .85rem; font-weight: 700; color: #111;
+  border: 1px solid rgba(0, 0, 0, .45); border-radius: 999px; padding: .25rem .9rem;
+}
+.cf-all:hover { background: rgba(0, 0, 0, .1); }
+.cf-wrap { position: relative; }
+.cf-stage { position: relative; touch-action: pan-y; outline: none; user-select: none; cursor: grab; }
+.cf-stage:active { cursor: grabbing; }
+.cf-stage:focus-visible { box-shadow: 0 0 0 2px #111; border-radius: 12px; }
+.cf-item { position: absolute; left: 50%; top: 12px; }
+.cf-card {
+  display: block; width: 100%; aspect-ratio: 5 / 7; padding: 0; border: 0; cursor: pointer;
+  background: #fff; border-radius: 14px; overflow: hidden; position: relative;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .45); transition: filter .3s; font: inherit;
+}
+.cf-card img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
+.cf-item:not(.is-active) .cf-card { filter: brightness(.6); }
+.cf-item.is-active .cf-card { box-shadow: 0 0 0 2px rgba(0, 0, 0, .75), 0 16px 36px rgba(0, 0, 0, .6); }
+.cf-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 200; }
+.cf-prev { left: .25rem; }
+.cf-next { right: .25rem; }
+.cf-caption { display: flex; flex-direction: column; align-items: center; gap: .1rem; margin-top: .75rem; text-align: center; }
+.cf-name { color: #111; font-size: 1.05rem; }
+.cf-price { color: #111; font-weight: 700; font-size: 1.15rem; }
+.cf-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: .4rem; margin-top: .7rem; }
+.cf-dot { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: rgba(0, 0, 0, .3); transition: all .2s; }
+.cf-dot.is-on { width: 22px; border-radius: 999px; background: #111; }
+@media (max-width: 640px) {
+  .cf-arrow { display: none; }
+  .cf-panel { border-radius: 20px; }
+}
+
+/* ---------- Carta holográfica de la página del producto ---------- */
+.detail-media { display: grid; place-items: center; padding: .5rem 0; }
+.holo-wrap { width: min(100%, 360px); aspect-ratio: 5 / 7; perspective: 1100px; }
+.holo-tilt { width: 100%; height: 100%; transform-style: preserve-3d; touch-action: pan-y; cursor: pointer; outline: none; user-select: none; }
+.holo-tilt:focus-visible .holo-face { outline: 3px solid #111; outline-offset: 3px; }
+.holo-flip { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+.holo-face {
+  position: absolute; inset: 0; border-radius: 18px; overflow: hidden;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  box-shadow: 0 14px 34px rgba(58, 42, 32, .35);
+}
+.holo-front { background: #fff; display: grid; place-items: center; }
+.holo-front img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.holo-glare { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .25s; mix-blend-mode: soft-light; }
+.holo-tilt.is-active .holo { opacity: .75; }
+.holo-tilt.is-active .holo-glare { opacity: 1; }
+.holo-back {
+  transform: rotateY(180deg); background: #b38a64; color: #111; border: 1px solid #94704d;
+  padding: 1.25rem 1.1rem 2.6rem; display: flex; flex-direction: column; gap: .5rem; overflow: auto;
+}
+.holo-back-title { margin: 0; font-size: 1.25rem; color: #111; }
+.holo-back-price { margin: 0 0 .25rem; font-size: 1.4rem; font-weight: 700; }
+.holo-specs { margin: 0; display: grid; gap: .4rem; }
+.holo-specs div { display: flex; justify-content: space-between; gap: .75rem; border-bottom: 1px solid rgba(0, 0, 0, .2); padding-bottom: .3rem; }
+.holo-specs dt { font-weight: 700; }
+.holo-specs dd { margin: 0; text-align: right; }
+.holo-hint {
+  position: absolute; bottom: .6rem; left: 50%; transform: translateX(-50%); white-space: nowrap;
+  font-size: .75rem; background: rgba(0, 0, 0, .65); color: #fff; padding: .2rem .75rem; border-radius: 999px; pointer-events: none;
+}
+.holo-hint-back { background: rgba(0, 0, 0, .75); }
+
+@media (max-width: 640px) {
+  body { background-size: 640px auto; }
+}
